@@ -4,7 +4,7 @@
         name: string;
     }
     
-    const { data: channels, status, refresh  } = await useFetch<Chanell[]>('http://localhost:8000/channels')
+    const { data: channels, status, refresh  } = await useFetch<Chanell[]>('http://localhost:8001/channels')
     
     const formData = ref({
         channelName: '',
@@ -18,7 +18,7 @@
 
     const addChannel = async () => {
         isModalVisible.value = false;
-        await $fetch('http://localhost:8000/channel', {
+        await $fetch('http://localhost:8001/channel', {
             method: 'post',
             body: { name: formData.value.channelName }
         }).then(() => {
