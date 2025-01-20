@@ -4,4 +4,10 @@ export default defineNuxtConfig({
   devtools: { enabled: true },
   css: ['~/assets/index.scss'],
   modules: ['@nuxtjs/google-fonts'],
+  postcss: {
+    plugins: {
+      'postcss-import': {},
+      'postcss-nested': {},
+    },
+  },
 })
