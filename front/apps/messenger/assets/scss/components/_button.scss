@@ -1,0 +1,26 @@
+.btn {
+    font-size: 1rem;
+    margin: 0.2rem;
+    padding: 0.5rem 1rem;
+    font-weight: bold;
+    color: white;
+    background-color: green;
+    border: none;
+    border-radius: 0.2rem;
+    cursor: pointer;
+    &:hover {
+        filter: brightness(90%);
+    }
+}
+
+.btn-close {
+    background-color: transparent;
+    border: none;
+    font-size: 1rem;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    &:hover {
+        filter: brightness(90%);
+    }
+}

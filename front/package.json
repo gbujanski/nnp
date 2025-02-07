@@ -1,0 +1,19 @@
+{
+  "name": "nnp",
+  "private": true,
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "devDependencies": {
+    "turbo": "^2.3.4"
+  },
+  "packageManager": "npm@10.0.0",
+  "scripts": {
+    "dev": "turbo run dev",
+    "build": "turbo run build",
+    "build-messenger": "turbo run build --filter=messenger",
+    "build-auth": "turbo run build --filter=@nnp/auth",
+    "lint": "turbo run lint"
+  }
+}
