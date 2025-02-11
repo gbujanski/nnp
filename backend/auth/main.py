@@ -3,7 +3,7 @@ import logging
 from typing import Optional
 import uuid
 
-from fastapi import FastAPI, Depends, Request
+from fastapi import FastAPI, Depends, Request, APIRouter
 from fastapi.middleware.cors import CORSMiddleware
 
 from db.database import engine, get_user_db
@@ -24,6 +24,8 @@ from sqlalchemy.orm import Session
 from sqlalchemy import select
 
 app = FastAPI()
+router = APIRouter(prefix="/api/auth")
+
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
@@ -87,7 +89,9 @@ async def get_user_manager(user_db: SQLAlchemyUserDatabase = Depends(get_user_db
     yield UserManager(user_db)
 
 
-cookie_transport = CookieTransport(cookie_max_age=60*60*24*365)
+cookie_transport = CookieTransport(
+    cookie_max_age=60*60*24*365
+)
 
 
 def get_jwt_strategy() -> JWTStrategy:
@@ -129,25 +133,23 @@ def startup_event():
     ensure_admin_exists()
 
 
-app.include_router(
-    fastapi_users.get_auth_router(auth_backend), prefix="/auth/jwt", tags=["auth"]
+router.include_router(
+    fastapi_users.get_auth_router(auth_backend),
+    tags=["auth"]
 )
-app.include_router(
+router.include_router(
     fastapi_users.get_register_router(UserRead, UserCreate),
-    prefix="/auth",
     tags=["auth"],
 )
-app.include_router(
+router.include_router(
     fastapi_users.get_reset_password_router(),
-    prefix="/auth",
     tags=["auth"],
 )
-app.include_router(
+router.include_router(
     fastapi_users.get_verify_router(UserRead),
-    prefix="/auth",
     tags=["auth"],
 )
-app.include_router(
+router.include_router(
     fastapi_users.get_users_router(UserRead, UserUpdate),
     prefix="/users",
     tags=["users"],
@@ -155,11 +157,12 @@ app.include_router(
 
 current_active_user = fastapi_users.current_user(active=True, optional=True)
 
-@app.get("/protected-route")
+@router.get("/protected-route")
 def protected_route(user: User = Depends(current_active_user)):
     return f"Hello, {user.email}"
 
-@app.get("/")
+@router.get("/")
 def admin_protected_route(user: User = Depends(current_active_user)):
     return "hello admin"
 
+app.include_router(router)

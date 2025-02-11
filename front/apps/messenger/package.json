@@ -10,10 +10,10 @@
     "postinstall": "nuxt prepare"
   },
   "dependencies": {
-    "@nuxtjs/google-fonts": "^3.2.0",
     "nuxt": "^3.15.0",
     "vue": "latest",
-    "vue-router": "latest"
+    "vue-router": "latest",
+    "@nnp/ui-kit": "*"
   },
   "devDependencies": {
     "sass": "^1.83.0"

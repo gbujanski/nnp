@@ -21,7 +21,7 @@
     }
 
     .modal-overlay {
-        background-color: rgb(31, 9, 226);
         border-radius: 6px;
+        border: 1px solid #BDBDBD;
     }
 </style>

@@ -1,0 +1,8 @@
+middlewares:
+  authMiddleware:
+    forwardAuth:
+      address: "http://backend-auth:8000/api/auth/users/me"
+      trustForwardHeader: true
+      authResponseHeaders:
+        - "X-User-ID"
+        - "X-User-Role"

@@ -53,7 +53,7 @@
             border: none;
             background-color: transparent;
             padding: 0.5rem 0.7rem;
-            caret-color: white;
+            caret-color: BDBDBD;
             &:focus {
                 outline: none;
             }
@@ -64,7 +64,7 @@
             font-size: 0.8rem;
             top: -7px;
             left: 12px;
-            color: white;
+            color: BDBDBD;
         }
     }
 
@@ -76,21 +76,21 @@
         height: 100%;
         pointer-events: none;
         &-start {
-            border: 1px solid white;
+            border: 1px solid #BDBDBD;
             border-right: none;
             border-radius: 0.2rem 0 0 0.2rem;
             width: 0.4rem;
             height: 100%;
         }
         &-middle {
-            border: 1px solid white;
+            border: 1px solid #BDBDBD;
             border-right: none;
             border-left: none;
             border-top: 1px solid transparent;
             height: 100%;
         }
         &-end {
-            border: 1px solid white;
+            border: 1px solid #BDBDBD;
             border-left: none;
             flex-grow: 1;
             height: 100%;
@@ -100,13 +100,13 @@
 
     .input-wrapper input:focus + .notch {
         .notch-start {
-            box-shadow: -1px 0 0 0 white, 0 -1px 0 0 white, 0 1px 0 0 white;
+            box-shadow: -1px 0 0 0 #BDBDBD, 0 -1px 0 0 #BDBDBD, 0 1px 0 0 #BDBDBD;
         }
         .notch-middle {
-            box-shadow: 0 1px 0 0 white;
+            box-shadow: 0 1px 0 0 #BDBDBD;
         }
         .notch-end {
-            box-shadow: 1px 0 0 0 white, 0 -1px 0 0 white, 0 1px 0 0 white;
+            box-shadow: 1px 0 0 0 #BDBDBD, 0 -1px 0 0 #BDBDBD, 0 1px 0 0 #BDBDBD;
         }
     }
 </style>

@@ -1,6 +1,6 @@
 from typing import Union
 from typing import Annotated
-from fastapi import FastAPI, Depends, HTTPException
+from fastapi import FastAPI, Depends, HTTPException, APIRouter
 from db.models.channels import Channel
 from sqlmodel import Session, select, SQLModel
 from fastapi.middleware.cors import CORSMiddleware
@@ -8,6 +8,8 @@ from fastapi.middleware.cors import CORSMiddleware
 from db.database import engine
 
 app = FastAPI()
+router = APIRouter(prefix="/api/messenger")
+
 
 origins = [
     "http://localhost:8000",
@@ -33,27 +35,27 @@ def get_session():
 
 create_db_and_tables()
 
+# this endpint is used to triggger auth verify in api gateway
+@router.get("/status")
+def get_status():
+    return {"status": "ok"}
 
-@app.get("/")
-def read_root():
-    return {"Hello": "World"}
 
-
-@app.post("/channel")
+@router.post("/channel")
 def create_channel(channel: Channel, session: Session = Depends(get_session)):
     session.add(channel)
     session.commit()
     session.refresh(channel)
     return channel
 
-@app.get("/channels")
+@router.get("/channels")
 def get_all_channels(session: Session = Depends(get_session)) -> list[Channel]:
     stmt = select(Channel)
     result = session.exec(stmt)
     return result
 
 
-@app.delete("/channel/{channel_id}")
+@router.delete("/channel/{channel_id}")
 def delete_channel(channel_id: int, session: Session = Depends(get_session)):
     channel = session.get(Channel, channel_id)
     if (not channel):
@@ -61,3 +63,5 @@ def delete_channel(channel_id: int, session: Session = Depends(get_session)):
     session.delete(channel)
     session.commit()
     return {"message": "Channel deleted successfully"}
+
+app.include_router(router)

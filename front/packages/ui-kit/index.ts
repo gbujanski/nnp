@@ -5,6 +5,8 @@ import Header from './src/components/Modal/Header.vue';
 import Content from './src/components/Modal/Content.vue';
 import Footer from './src/components/Modal/Footer.vue';
 import DefaultLayout from './src/layouts/DefaultLayout.vue';
+import Container from './src/components/Sidenav/Container.vue';
+import Item from './src/components/Sidenav/Item.vue';
 
 export {
     Input,
@@ -13,5 +15,8 @@ export {
     Header as ModalHeader,
     Content as ModalContent,
     Footer as ModalFooter,
-    DefaultLayout
+    DefaultLayout,
+    Container as SidenavContainer,
+    Item as SidenavItem
+
 };

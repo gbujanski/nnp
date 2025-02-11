@@ -3,21 +3,19 @@ FROM node:22.13.0-alpine as build-stage
 
 WORKDIR /app
 
+COPY ../apps/messenger ./apps/messenger
+COPY ../packages/ui-kit ./packages/ui-kit
+COPY ../package.json ./package.json
+COPY ../turbo.json ./turbo.json
+
 COPY . .
 RUN npm install
-RUN npm run build
-
-RUN rm -rf node_modules && \
-  NODE_ENV=production npm install \
-  --prefer-offline \
-  --pure-lockfile \
-  --non-interactive \
-  --production=true
+RUN npm run build-messenger
 
 FROM build-stage as prod-stage
 
 WORKDIR /app
 
-COPY --from=build-stage /app/.output ./.output/
+COPY --from=build-stage /app/apps/messenger/.output ./.output/
 
 CMD [ "node", ".output/server/index.mjs" ]

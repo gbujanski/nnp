@@ -12,7 +12,7 @@
   "scripts": {
     "dev": "turbo run dev",
     "build": "turbo run build",
-    "build-messenger": "turbo run build --filter=messenger",
+    "build-messenger": "turbo run build --filter=@nnp/messenger",
     "build-auth": "turbo run build --filter=@nnp/auth",
     "lint": "turbo run lint"
   }

@@ -9,10 +9,11 @@ services:
     ports:
       - "80:80"
       - "8080:8080"
-    networks:
-      - app-network
     volumes:
       - "/var/run/docker.sock:/var/run/docker.sock"
+    networks:
+      - app-network
+
 
   db-messenger:
     container_name: db-messenger
@@ -62,6 +63,14 @@ services:
     labels:
       - "traefik.http.routers.api-messenger.rule=Host(`localhost`) && PathPrefix(`/api/messenger`)"
       - "traefik.http.services.api-messenger.loadbalancer.server.port=8000"
+      - "traefik.http.routers.api-messenger.middlewares=api-messenger-auth@docker"
+      - "traefik.http.middlewares.api-messenger-auth.forwardauth.address=http://backend-auth:8000/api/auth/users/me"
+      - "traefik.http.middlewares.api-messenger-auth.forwardauth.trustForwardHeader=true"
+      - "traefik.http.middlewares.api-messenger-auth.forwardauth.authResponseHeaders=X-User-ID,X-User-Role"
+    ports:
+      - "8004:8000"
+
+
     depends_on:
       - db-messenger
     networks:
@@ -85,6 +94,8 @@ services:
     labels:
       - "traefik.http.routers.api-auth.rule=Host(`localhost`) && PathPrefix(`/api/auth`)"
       - "traefik.http.services.api-auth.loadbalancer.server.port=8000"
+    ports:
+      - "8003:8000"
     depends_on:
       - db-auth
     networks:
@@ -92,8 +103,11 @@ services:
 
   front-messenger:
     build:
-      context: ../front/apps/messenger
+      context: ../front
+      dockerfile: apps/messenger/Dockerfile
     container_name: front-messenger
+    ports:
+      - "3001:3000"
     labels:
       - "traefik.http.routers.messenger.rule=Host(`localhost`) && PathPrefix(`/messenger`)"
       - "traefik.http.services.messenger.loadbalancer.server.port=3000"
@@ -105,6 +119,8 @@ services:
       context: ../front
       dockerfile: apps/auth/Dockerfile
     container_name: front-auth
+    ports:
+      - "3002:3000"
     labels:
       - "traefik.http.routers.auth.rule=Host(`localhost`) && PathPrefix(`/auth`)"
       - "traefik.http.services.auth.loadbalancer.server.port=3000"
