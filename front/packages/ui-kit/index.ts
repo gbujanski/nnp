@@ -18,5 +18,4 @@ export {
     DefaultLayout,
     Container as SidenavContainer,
     Item as SidenavItem
-
 };

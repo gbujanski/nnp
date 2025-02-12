@@ -15,13 +15,14 @@
         display: flex;
         justify-content: center;
         align-items: center;
-        background-color: rgba(0, 0, 0, 0.5);
+        background-color: var(--main-backdrop-bg);
         display: flex;
         flex-direction: column;
     }
 
     .modal-overlay {
-        border-radius: 6px;
-        border: 1px solid #BDBDBD;
+        border-radius: var(--main-border-radius);
+        border: var(--main-border);
+        background-color: var(--main-bg);
     }
 </style>

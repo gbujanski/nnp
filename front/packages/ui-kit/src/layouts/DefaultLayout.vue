@@ -11,7 +11,7 @@
     .header {
         padding: 0.5rem 1rem;
         height: 40px;
-        border-bottom: 1px solid #BDBDBD;
+        border-bottom: var(--main-border);
         align-items: center;
         display: flex;
     }

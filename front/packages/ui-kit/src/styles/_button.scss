@@ -4,20 +4,35 @@
     padding: 0.5rem 1rem;
     font-weight: bold;
     border: none;
-    border-radius: 0.2rem;
+    border-radius: var(--main-border-radius);
     cursor: pointer;
     &:hover {
-        filter: brightness(90%);
+        filter: var(--main-hover-filter);
     }
 }
 
 .btn-close {
     background-color: transparent;
     border: none;
-    font-size: 1rem;
+    font-size: 0.9rem;
     font-weight: bold;
     cursor: pointer;
     &:hover {
-        filter: brightness(90%);
+        background-color: var(--main-bg);
+        border-radius: var(--main-border-radius);
+        filter: var(--main-hover-filter);
+    }
+}
+
+.btn-link {
+    border: none;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    &:not(:hover) {
+        background-color: transparent;
+    }
+    &:hover {
+        filter: var(--main-hover-filter);
     }
 }

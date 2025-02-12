@@ -29,10 +29,8 @@
         min-width: 250px;
         min-height: 60px;
         padding: 15px;
-        background-color: blue;
-        color: white;
-        border-radius: 5px;
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+        border-radius: var(--border-radius);
+        border: var(--border);
         box-sizing: border-box;
     }
 </style>

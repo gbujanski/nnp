@@ -27,9 +27,8 @@
         cursor: pointer;
 
         &-active {
-            border-radius: 0.25rem;
+            border-radius: var(--border-radius);
             font-weight: bold;
-            color: white;
         }
     }
 </style>

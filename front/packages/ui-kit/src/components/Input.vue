@@ -53,7 +53,6 @@
             border: none;
             background-color: transparent;
             padding: 0.5rem 0.7rem;
-            caret-color: BDBDBD;
             &:focus {
                 outline: none;
             }
@@ -64,7 +63,7 @@
             font-size: 0.8rem;
             top: -7px;
             left: 12px;
-            color: BDBDBD;
+            color: #5f5f5f;
         }
     }
 
@@ -76,37 +75,38 @@
         height: 100%;
         pointer-events: none;
         &-start {
-            border: 1px solid #BDBDBD;
+            border: var(--main-border);
             border-right: none;
-            border-radius: 0.2rem 0 0 0.2rem;
+            border-radius: var(--main-border-radius) 0 0 var(--main-border-radius);
             width: 0.4rem;
             height: 100%;
         }
         &-middle {
-            border: 1px solid #BDBDBD;
+            border: var(--main-border);
             border-right: none;
             border-left: none;
-            border-top: 1px solid transparent;
+            border-top: var(--main-border);
+            border-top-color: transparent;
             height: 100%;
         }
         &-end {
-            border: 1px solid #BDBDBD;
+            border: var(--main-border);
             border-left: none;
             flex-grow: 1;
             height: 100%;
-            border-radius: 0 0.2rem 0.2rem 0;
+            border-radius: 0 var(--main-border-radius) var(--main-border-radius) 0;
         }
     }
 
     .input-wrapper input:focus + .notch {
         .notch-start {
-            box-shadow: -1px 0 0 0 #BDBDBD, 0 -1px 0 0 #BDBDBD, 0 1px 0 0 #BDBDBD;
+            box-shadow: -1px 0 0 0 var(--main-outline-color), 0 -1px 0 0 var(--main-outline-color), 0 1px 0 0 var(--main-outline-color);
         }
         .notch-middle {
-            box-shadow: 0 1px 0 0 #BDBDBD;
+            box-shadow: 0 1px 0 0 var(--main-outline-color);
         }
         .notch-end {
-            box-shadow: 1px 0 0 0 #BDBDBD, 0 -1px 0 0 #BDBDBD, 0 1px 0 0 #BDBDBD;
+            box-shadow: 1px 0 0 0 var(--main-outline-color), 0 -1px 0 0 var(--main-outline-color), 0 1px 0 0 var(--main-outline-color);
         }
     }
 </style>
